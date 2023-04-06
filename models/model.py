@@ -164,7 +164,8 @@ class multiTaskModel:
         # we will use AdamW optimizer from huggingface transformers. This optimizer is 
         #widely used with BERT. It is modified form of Adam which is used in Tensorflow 
         #implementations        
-        optimizer = AdamW(self.network.parameters(), lr=lr, eps = eps)
+        #optimizer = AdamW(self.network.parameters(), lr=lr, eps = eps)
+        optimizer = torch.optim.AdamW(self.network.parameters(), lr=lr, eps = eps)
 
         # lr scheduler
         scheduler = get_linear_schedule_with_warmup(optimizer,
