@@ -186,8 +186,9 @@ def create_data_ner(data, chunkNumber, tempList, maxSeqLen, tokenizer, labelMap)
                 tempLabels.append('[SEP]')
 
                 out = tokenizer.encode_plus(text = tempTokens, add_special_tokens=False,
-                                        truncation_strategy ='only_first',
-                                        max_length = maxSeqLen, pad_to_max_length=True)
+                                        truncation = True,
+                                        #truncation_strategy ='only_first',
+                                        max_length = maxSeqLen, padding = "max_length")
                 typeIds = None
                 inputMask = None
                 tokenIds = out['input_ids']
@@ -292,7 +293,7 @@ def main():
         configName = defaultName
     
     #making tokenizer for model
-    tokenizer = tokenizerClass.from_pretrained(configName)
+    tokenizer = tokenizerClass.from_pretrained(configName, do_lower_case=True, truncation=True)
     print('{} model tokenizer loaded for config {}'.format(modelName, configName))
     dataPath = os.path.join(args.data_dir, '{}_prepared_data'.format(configName))
     if not os.path.exists(dataPath):

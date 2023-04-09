@@ -110,8 +110,9 @@ class inferPipeline:
                 tempLabels.append('[SEP]')
 
                 out = self.tokenizer.encode_plus(text = tempTokens, add_special_tokens=False,
-                                        truncation_strategy ='only_first',
-                                        max_length = self.maxSeqLen, pad_to_max_length=True)
+                                        truncation = True,
+                                        #truncation_strategy ='only_first',
+                                        max_length = self.maxSeqLen, padding = "max_length")#pad_to_max_length=True)
                 typeIds = None
                 inputMask = None
                 tokenIds = out['input_ids']
@@ -286,7 +287,7 @@ class inferPipeline:
                                     collate_fn=batchSamplerUtils.collate_fn,
                                     pin_memory=torch.cuda.is_available())
 
-        with torch.no_grad():
+        with torch.inference_mode():
             allIds, allPreds, allScores = evaluate(allData, batchSampler, inferDataLoader, self.taskParams,
                     self.model, gpu=torch.cuda.is_available(), evalBatchSize=batchSize, needMetrics=False, hasTrueLabels=False,
                     returnPred=True)

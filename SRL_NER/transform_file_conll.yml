@@ -1,0 +1,17 @@
+transform1:
+  transform_func: coNLL_ner_pos_to_tsv
+  read_file_names:
+    - coNLL_train.txt
+    - coNLL_dev.txt
+    - coNLL_test.txt
+  read_dir: coNLL_data/SRL
+  save_dir: data_to_prepare
+
+transform2:
+  transform_func: coNLL_ner_pos_to_tsv
+  read_file_names:
+    - coNLL_GENIAtagger_train.txt
+    - coNLL_GENIAtagger_dev.txt
+    - coNLL_GENIAtagger_test.txt
+  read_dir: coNLL_data/NER
+  save_dir: data_to_prepare

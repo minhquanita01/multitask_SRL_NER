@@ -96,11 +96,11 @@ def evaluate(dataSet, batchSampler, dataLoader, taskParams,
             if metrics is None:
                 logger.info("No metrics are provided in task params (file)")
                 continue
-            if taskName == 'conllsrl' :
-                logger.info("********** {} Evaluation************\n".format(taskName))
-                for m in metrics:
-                    metricVal = METRICS[m](allLabels[i], allPreds[i])
-                    logger.info("{} : {}".format(m, metricVal))
+
+            logger.info("********** {} Evaluation************\n".format(taskName))
+            for m in metrics:
+                metricVal = METRICS[m](allLabels[i], allPreds[i])
+                logger.info("{} : {}".format(m, metricVal))
 
     if wrtPredPath is not None and wrtDir is not None:
         for i in range(len(allPreds)):
@@ -114,7 +114,7 @@ def evaluate(dataSet, batchSampler, dataLoader, taskParams,
 
             savePath = os.path.join(wrtDir, "{}_{}".format(taskName, wrtPredPath))
             df.to_csv(savePath, sep = "\t", index = False)
-            #logger.info("Predictions File saved at {}".format(savePath))
+            logger.info("Predictions File saved at {}".format(savePath))
 
     if returnPred:
         return allIds, allPreds, allScores

@@ -1,14 +1,12 @@
 from enum import IntEnum
-from transformers import *
+from transformers import BertConfig, BertModel, BertTokenizer, DistilBertConfig, DistilBertModel, DistilBertTokenizer, AlbertConfig, AlbertModel, AlbertTokenizer, RobertaConfig, RobertaModel, RobertaTokenizer, XLNetConfig, XLNetModel, XLNetTokenizer, ElectraConfig, ElectraModel, ElectraTokenizer
 from models.loss import *
 from utils.eval_metrics import *
 from utils.tranform_functions import *
 
-from transformers import BertTokenizer
-bioBertTokenizer = BertTokenizer.from_pretrained("dmis-lab/biobert-base-cased-v1.2", do_lower_case=True,truncation=True)
-
 NLP_MODELS = {
-    "bert": (BertConfig, BertModel, bioBertTokenizer, 'bert-base-uncased'),
+    "biobert": (BertConfig, BertModel, BertTokenizer, 'dmis-lab/biobert-base-cased-v1.2'),
+    "bert": (BertConfig, BertModel, BertTokenizer, 'bert-base-uncased'),
     "distilbert": (DistilBertConfig, DistilBertModel, DistilBertTokenizer, 'distilbert-base-uncased'),
     "albert": (AlbertConfig, AlbertModel, AlbertTokenizer, 'albert-base-v2'),
     "roberta": (RobertaConfig, RobertaModel, RobertaTokenizer, 'roberta-base'),
@@ -47,6 +45,7 @@ TRANSFORM_FUNCS = {
 }
 
 class ModelType(IntEnum):
+    BIOBERT = 0
     BERT = 1
     DISTILBERT = 2
     ALBERT = 3

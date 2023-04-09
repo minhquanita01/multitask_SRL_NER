@@ -1,0 +1,31 @@
+conllSRL:
+  model_type: BIOBERT
+  config_name: dmis-lab/biobert-base-cased-v1.2
+  dropout_prob: 0.2
+  label_map_or_file: data_to_prepare/ner_coNLL_train_label_map.joblib
+  metrics:
+  - seqeval_f1_score
+  - seqeval_precision
+  - seqeval_recall
+  loss_type: NERLoss
+  task_type: NER
+  file_names:
+  - ner_coNLL_train.tsv
+  - ner_coNLL_dev.tsv
+  - ner_coNLL_test.tsv
+
+conllNER:
+    model_type: BIOBERT
+    config_name: dmis-lab/biobert-base-cased-v1.2
+    dropout_prob: 0.2
+    label_map_or_file: data_to_prepare/ner_coNLL_GENIAtagger_train_label_map.joblib
+    metrics:
+    - seqeval_f1_score
+    - seqeval_precision
+    - seqeval_recall
+    loss_type: NERLoss
+    task_type: NER
+    file_names:
+    - ner_coNLL_GENIAtagger_train.tsv
+    - ner_coNLL_GENIAtagger_dev.tsv
+    - ner_coNLL_GENIAtagger_test.tsv
